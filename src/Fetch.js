@@ -3,7 +3,7 @@ import axios from "axios";
 const url = "https://covid19.mathdro.id/api";
 
 // async function
-export const fetchData = async (country) => {
+export function fetchData (country) {
   let urlCountry = url;
 
   if (country) {
@@ -19,7 +19,7 @@ export const fetchData = async (country) => {
       total: data.confirmed.value,
       lastUpdate: data.lastUpdate,
     };
-    return mainData;
+    return {type: "GET_DATA, data: mainData};
   } catch (err) {
     console.log(err);
   }

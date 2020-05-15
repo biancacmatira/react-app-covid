@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { fetchDailyData } from "../../api";
+import { connect } from "react-redux";
+import { fetchDailyData } from "../../Fetch";
 import { Line, Doughnut } from "react-chartjs-2";
 import styles from "./Chart.module.css";
 
 const Chart = ({ country, data: { active, recovered, deaths, total } }) => {
   const [daily, setDaily] = useState([]);
 
-  useEffect(() => {
-    const fetchDailyAPI = async () => {
-      const daily = await fetchDailyData();
-      setDaily(daily);
-    };
-    fetchDailyAPI();
-  }, []);
+  // useEffect(() => {
+  //   const fetchDailyAPI = async () => {
+  //     const daily = await fetchDailyData();
+  //     setDaily(daily);
+  //   };
+  //   fetchDailyAPI();
+  // }, []);
 
   const globalChart =
     daily.length !== 0 ? (
@@ -68,6 +69,7 @@ const Chart = ({ country, data: { active, recovered, deaths, total } }) => {
       }}
     />
   ) : null;
+
   return (
     <div className={styles.container}>
       {country ? countryChart : globalChart}
@@ -75,4 +77,9 @@ const Chart = ({ country, data: { active, recovered, deaths, total } }) => {
   );
 };
 
-export default Chart;
+const mapStateToProps = (state) => ({
+  country: "",
+  data: {},
+});
+
+export default connect(mapStateToProps)(Chart);

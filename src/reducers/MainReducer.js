@@ -4,13 +4,16 @@ const initState = {
 };
 
 const MainReducer = (state = initState, action) => {
-  console.log(action.payload);
+  console.log(action);
   switch (action.type) {
-    case "GET_COUNTRY":
+    case "GET_DATA":
+      return state;
+    case "GET_DAILY":
+      return state;
+    case "GET_COUNTRIES":
       return state;
     default:
       return state;
-      break;
   }
 };
 
